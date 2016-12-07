@@ -54,8 +54,8 @@ export default class App extends Component {
     return (
       <Image
         style={StyleSheet.absoluteFill}
-        resizeMode={'contain'}
         source={{ uri: urls[i] }}
+        resizeMode={'contain'}
       />
     );
   }
@@ -77,6 +77,7 @@ export default class App extends Component {
                 style={styles.image}
                 key={url}
                 source={{ uri: url, width: 200 }}
+                resizeMode={'contain'}
               />
             ))}
           </ImageCarousel>
