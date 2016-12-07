@@ -11,6 +11,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Easing,
 // eslint-disable-next-line
 } from 'react-native';
 import _ from 'lodash/fp';
@@ -18,7 +19,11 @@ import _ from 'lodash/fp';
 import React, { Component, PropTypes } from 'react';
 import SwipeableViews from 'react-swipeable-views/lib/index.native.scroll';
 
-const ANIM_CONFIG = { duration: 300 };
+const ANIM_CONFIG = {
+  duration: 3000,
+  easing: Easing.elastic(0.5),
+};
+
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 type Props = {
