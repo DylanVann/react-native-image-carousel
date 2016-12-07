@@ -22,17 +22,13 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# VSCode
+# Android/IntelliJ
 #
-.vscode/launchReactNative.js
-.vscode/.react/
-typings/
-
-# Android/IJ
-#
+build/
 .idea
 .gradle
 local.properties
+*.iml
 
 # node.js
 #
@@ -43,4 +39,4 @@ npm-debug.log
 buck-out/
 \.buckd/
 android/app/libs
-android/keystores/debug.keystore
+*.keystore
