@@ -180,20 +180,20 @@ export default class ImageCarousel extends Component {
       const newState = {
         origin: { x, y, width, height },
         slidesDown: slidesDown,
-      }
-      this.state = { ...this.state, ...newState };
-      this.setState(newState);
-      Animated.timing(
-        this.state.openAnim,
-        { ...ANIM_CONFIG, toValue: 0 },
-      ).start(() => {
-        this.setState({
-          animating: false,
-          fullscreen: false,
-          selectedImageHidden: false,
-          slidesDown: false,
+      };
+      this.setState(newState, () => {
+        Animated.timing(
+          this.state.openAnim,
+          { ...ANIM_CONFIG, toValue: 0 },
+        ).start(() => {
+          this.setState({
+            animating: false,
+            fullscreen: false,
+            selectedImageHidden: false,
+            slidesDown: false,
+          });
+          this.props.onClose && this.props.onClose();
         });
-        this.props.onClose && this.props.onClose();
       });
     });
   }
@@ -243,6 +243,7 @@ export default class ImageCarousel extends Component {
           // $FlowFixMe
           inputRange, outputRange: [origin.height, screenHeight],
         }),
+        flex: 0,
       } : {
         left: 0,
         right: 0,
@@ -299,7 +300,6 @@ export default class ImageCarousel extends Component {
         <SwipeableViews
           style={StyleSheet.absoluteFill}
           index={selectedIdx}
-          indexLatest={selectedIdx}
           onChangeIndex={(idx: number) => {
             this.setState({ selectedIdx: idx });
             this.props.onIdxChange && this.props.onIdxChange(idx);
@@ -316,7 +316,6 @@ export default class ImageCarousel extends Component {
               return (
                 <View key={idx} style={[StyleSheet.absoluteFill]}>
                   <Animated.View
-                    key={idx}
                     style={[
                       this._getSwipeableStyle(idx),
                       (selectedIdx === idx && panning) &&
@@ -363,7 +362,7 @@ export default class ImageCarousel extends Component {
 
   render(): ReactElement<any> {
     const { children, style } = this.props;
-    const { animating, selectedImageHidden, selectedIdx } = this.state;
+    const { selectedImageHidden, selectedIdx } = this.state;
     return (
       <View style={style}>
         {_.map.convert({ cap: false })(
