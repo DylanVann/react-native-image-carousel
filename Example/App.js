@@ -21,33 +21,8 @@ const urls = [
 /* eslint-enable max-len */
 
 export default class App extends Component {
-  _imageCarousel: ImageCarousel;
-
   componentWillMount() {
-    (this: any)._renderHeader = this._renderHeader.bind(this);
-    (this: any)._handleHeaderPress = this._handleHeaderPress.bind(this);
-
     StatusBar.setBarStyle('light-content');
-  }
-
-  _handleHeaderPress() {
-    this._imageCarousel.close();
-  }
-
-  _renderHeader(): ReactElement<any> {
-    return (
-      <TouchableWithoutFeedback onPress={this._handleHeaderPress}>
-        <View>
-          <Text style={styles.closeText}>Exit</Text>
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-
-  _renderFooter(): ReactElement<any> {
-    return (
-      <Text style={styles.footerText}>Footer!</Text>
-    );
   }
 
   renderImage(i: number) {
@@ -62,26 +37,17 @@ export default class App extends Component {
 
   render(): ReactElement<any> {
     return (
-      <View style={styles.container}>
-        <Text>ADDITIONAL IMAGES</Text>
-        <View>
-          <ImageCarousel
-            ref={(imageCarousel: ImageCarousel) => {
-              this._imageCarousel = imageCarousel;
-            }}
-            renderContent={this.renderImage}
-            onIdxChange={() => console.log('wtf')}
-          >
-            {urls.map((url: string) => (
-              <Image
-                style={styles.image}
-                key={url}
-                source={{ uri: url, width: 200 }}
-                resizeMode={'contain'}
-              />
-            ))}
-          </ImageCarousel>
-        </View>
+      <View style={[styles.container]}>
+        <ImageCarousel renderContent={this.renderImage}>
+          {urls.map((url: string) => (
+            <Image
+              style={styles.image}
+              key={url}
+              source={{ uri: url, width: 200 }}
+              resizeMode={'contain'}
+            />
+          ))}
+        </ImageCarousel>
       </View>
     );
   }
@@ -91,15 +57,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  closeText: {
-    color: 'white',
-    textAlign: 'right',
-    padding: 10,
-  },
-  footerText: {
-    color: 'white',
-    textAlign: 'center',
   },
   image: {
     marginRight: 2,
