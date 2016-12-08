@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, { Component } from 'react';
-import ImageCarousel from 'react-native-image-carousel';
+import ImageCarousel from './react-native-image-carousel';
 
 /* eslint-disable max-len */
 const urls = [
@@ -43,7 +43,7 @@ export default class App extends Component {
             <Image
               style={styles.image}
               key={url}
-              source={{ uri: url, width: 200 }}
+              source={{ uri: url, width: 200, height: 200 }}
               resizeMode={'contain'}
             />
           ))}
@@ -56,10 +56,9 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   image: {
-    marginRight: 2,
     height: 100,
+    width: 100,
   },
 });
