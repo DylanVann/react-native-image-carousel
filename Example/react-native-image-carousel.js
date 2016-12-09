@@ -295,6 +295,7 @@ export default class ImageCarousel extends Component {
             this.setState({ selectedImageHidden: true });
           }
         }}
+        onRequestClose={this.close}
       >
         <Animated.View style={[styles.modalBackground, opacity]} />
         <SwipeableViews
